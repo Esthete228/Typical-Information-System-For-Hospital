@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Appointments</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Add some styles for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style the action buttons */
+        .action-buttons a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .delete-button {
+            background-color: #dc3545; /* Red color, you can customize */
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div class="bar-theme top-bar top-bar-large">
+        <a href="/home" class="bar-item theme-l1">
+            <button class="button theme">Go Back to Starter Page</button>
+        </a>
+        <a href="/patientConclusion" class="bar-item theme-l2">
+            <button class="button theme">Open medical cards</button>
+        </a>
+    </div>
+</div>
+
+<h2>Doctor Appointments</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Date and Time</th>
+        <th>Patient Name</th>
+        <th>Patient Surname</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.dateTime}"></td>
+        <td th:text="${appointment.patient.firstName}"></td>
+        <td th:text="${appointment.patient.lastName}"></td>
+        <td class="action-buttons">
+            <a th:href="@{/deleteAppointment/{id}(id=${appointment.appointment_id})}" class="delete-button">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
